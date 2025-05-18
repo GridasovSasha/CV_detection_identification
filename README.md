@@ -19,7 +19,7 @@ Result:
 <img src="images_to_report\blure.jpg" width="400">
 
 
-## Work result
+## Model training and identification
 
 ## 🛠️ Технологии
 

@@ -20,7 +20,8 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 
 while(True):  # Основной бесконечный цикл обработки видео
     ret, img = cap.read()  # Разбиение видео на кадры
-    faces = face_cascade.detectMultiScale(img, scaleFactor=2, minNeighbors=5) #получаем массив лиц
+    gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=2, minNeighbors=5) #получаем массив лиц
 
     for (x, y, width, height) in faces:
         #cv2.rectangle(img, (x,y), (x+width, y+height), (100, 0 , 255), 2) # Отрисовка прямоугольника вокруг лица

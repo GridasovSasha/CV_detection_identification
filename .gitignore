@@ -1,5 +1,7 @@
 /dataSet
 /trainer
 /test
+/images_to_report
 
+/black_white_conv.py
 /foto_name_changer.py
