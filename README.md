@@ -20,8 +20,19 @@ Result:
 
 
 ## Model training and identification
+[face_train](face_train.py) - model training script
 
-## 🛠️ Технологии
+[face_detect](face_detect.py) - In this file I implemented real-time identification of me in the video stream using the LBPH (Local Binary Patterns Histograms) algorithm from the cv2 module, it is implemented by the function cv2.face.LBPHFaceRecognizer_create()
 
+The algorithm works as follows:
+* Splits the image into small regions.
+* For each pixel in the region, compares its intensity with its neighbors and generates a binary pattern (local binary pattern).
+* Constructs histograms of these patterns for all regions.
+* Uses these histograms for comparison and face recognition.
 
-## Установка
+Result:
+
+<img src="images_to_report\detect.jpg" width="400">
+<img src="images_to_report\detect2.jpg" width="400">
+
+As we can see, the model recognizes me with acceptable confidence, while my friend's face is just made into a rectangle by the algorithm.

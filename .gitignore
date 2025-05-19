@@ -2,5 +2,6 @@
 /trainer
 /test
 
+/face_gen.py
 /black_white_conv.py
 /foto_name_changer.py

@@ -4,10 +4,10 @@ import numpy as np
 from PIL import Image
 
 path = os.path.dirname(os.path.abspath(__file__)) # получаем абсолютный путь к директории
-dataPath = 'dataSet\Masha_grey'
+dataPath = 'dataSet\Sasha'
 
 # LBPH — это алгоритм распознавания лиц, основанный на локальных бинарных шаблонах (Local Binary Patterns)
-recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer = cv2.face.LBPHFaceRecognizer_create(radius=1)
 # Загрузка каскадного классификатора Хаара для обнаружения лиц
 faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
@@ -33,7 +33,7 @@ def get_images_and_labels(datapath):
             current_id += 1
         label = label_ids[label_str]
 
-        image_pil = Image.open(image_path).convert('L') # читаем картинку и сразу переводим в ч/б
+        image_pil = Image.open(image_path).convert('L') # читаем картинку и сразу переводим в ч/б(.convert('L'))
         image = np.array(image_pil, 'uint8') # переводим картинку в numpy-массив
         faces = faceCascade.detectMultiScale(image) # определяем лицо на картинке
 
@@ -41,11 +41,15 @@ def get_images_and_labels(datapath):
         for (x, y, width, height) in faces:
             images.append(image[y: y + height, x: x + width]) # добавляем его к списку картинок
             labels.append(label) # добавляем id пользователя в список подписей
-            cv2.imshow("Adding faces to training set...", image[y: y + height, x: x + width]) # выводим текущую картинку на экран
+
+            # Вывод информации о файле и координатах лица
+            print(f"Файл: {image_path} (x: {x}, y: {y}, width: {width}, height: {height})")
+
+            cv2.imshow("Adding faces to training set...", image) # выводим текущую картинку на экран
             cv2.waitKey(100) # добавляем задержку
 
     # возвращаем список картинок и подписей
-    return images, np.array(labels, dtype=np.int32), label_ids  # Return label mapping for reference
+    return images, np.array(labels, dtype=np.int32), label_ids  # Возвращаем отображение меток для справки
 
 # получаем список картинок и подписей
 images, labels, label_mapping = get_images_and_labels(dataPath)
